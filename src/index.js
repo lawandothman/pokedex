@@ -13,6 +13,7 @@ app.use(express.static("public"));
 app.get("/", function(request, response) {
   console.log("Someone is requesting the page /");
   response.render("index.html");
+  
 });
 
 app.get("/pokemon/:id", async (req, res) => {
