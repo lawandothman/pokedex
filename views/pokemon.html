@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokémon</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+
+
+<body>
+  
+<li class="PokemonCard">
+  <img class="card-image" src="{{pokemon.sprites.front_default}}"/>
+  <h2 class="card-title">{{pokemon.id}} {{pokemon.name}}</h2>
+  <p class="card-sub">Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}</p>
+  <p class "card-weight"> Weight: {{pokemon.weight/10}} kg </p>
+  </li>
+  
+  <a href="/pokemon/{{pokemon.id - 1}}">Previous</a>
+  <a href="/">Pokédex</a>
+  <a href="/pokemon/{{pokemon.id + 1}}">Next</a>
+
+  {%for move in moves%}
+  <p> {{move.data.name}} </p>
+  {%endfor%}
+
+
+  
+  </body>
+
+
+</html>
