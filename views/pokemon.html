@@ -22,10 +22,18 @@
   <a href="/pokemon/{{pokemon.id - 1}}">Previous</a>
   <a href="/">Pokédex</a>
   <a href="/pokemon/{{pokemon.id + 1}}">Next</a>
+  <hr>
 
   {%for move in moves%}
   <p> {{move.data.name}} </p>
+    <p> type: {{move.data.type.name}} </p>
+    <p> power : {{move.data.power}} </p>
+    <p> damage class: {{move.data.damage_class.name}} </p>
+    <p> accuracy: {{move.data.accuracy or '100'}} %</p>
+    <p> power point: {{move.data.pp}} </p>
+  <hr>
   {%endfor%}
+
 
 
   

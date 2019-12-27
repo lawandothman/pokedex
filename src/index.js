@@ -25,6 +25,7 @@ app.get("/pokemon/:id", async (req, res) => {
       moves.push(axios.get(move.move.url))
   }
   const resolvePromises = await Promise.all(moves)
+
   console.log(resolvePromises)
   res.render("pokemon.html", {
     number: id, 
@@ -33,7 +34,7 @@ app.get("/pokemon/:id", async (req, res) => {
   })
 })
 
-// for moves : accuracy, damage_class: name, pp, power, stat changes ?, type name 
+// for moves :  type name 
 
 
 async function getPokemon(id) {
