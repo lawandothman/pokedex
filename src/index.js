@@ -10,9 +10,19 @@ nunjucks.configure("views", {
 
 app.use(express.static("public"));
 
-app.get("/", function(request, response) {
+app.get("/", async function(req, res) {
   console.log("Someone is requesting the page /");
-  response.render("index.html");
+  const url = "https://pokeapi.co/api/v2/pokemon/";
+  const pokemonList = await axios.get(url);
+  console.log(pokemonList);
+  const promises = pokemonList.data.results.map(pokemon =>
+    axios.get(pokemon.url)
+  );
+  const pokemons = await Promise.all(promises);
+  console.log(pokemons);
+  res.render("index.html", {
+    pokemon: pokemons
+  });
 });
 
 app.get("/pokemon/:id", async (req, res) => {
@@ -39,5 +49,5 @@ async function getPokemon(id) {
 }
 
 const listener = app.listen(process.env.PORT || 3000, function() {
-  console.log("Your app is listening on port  " + listener.address().port);
+  console.log("  Your app is listening on port  " + listener.address().port);
 });
