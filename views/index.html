@@ -11,7 +11,14 @@
     <div class="container">
         <h1>Welcome to My Pokédex</h1>
     </div>
-    
+
+    <ol>
+    {%for pokemons in pokemon%}
+      <p class = "name"> name: {{pokemons.data.name}} </p>
+      <img src = "{{pokemons.data.sprites["front_default"]}}">
+
+    {%endfor%}
+    </ol>
     <script src="../client.js"></script>
 </body>
 </html>
