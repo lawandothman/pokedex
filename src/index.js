@@ -13,7 +13,6 @@ app.use(express.static("public"));
 app.get("/", function(request, response) {
   console.log("Someone is requesting the page /");
   response.render("index.html");
-  }
 });
 
 app.get("/pokemon/:id", async (req, res) => {
@@ -31,7 +30,6 @@ app.get("/pokemon/:id", async (req, res) => {
     moves: resolvePromises
   });
 });
-
 
 async function getPokemon(id) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
