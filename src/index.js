@@ -13,6 +13,7 @@ app.use(express.static("public"));
 app.get("/", function(request, response) {
   console.log("Someone is requesting the page /");
   response.render("index.html");
+  }
 });
 
 app.get("/pokemon/:id", async (req, res) => {
@@ -31,6 +32,7 @@ app.get("/pokemon/:id", async (req, res) => {
   });
 });
 
+
 async function getPokemon(id) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const res = await axios.get(url);
@@ -38,6 +40,6 @@ async function getPokemon(id) {
   return pokemon;
 }
 
-const listener = app.listen(process.env.PORT | 3000, function() {
+const listener = app.listen(process.env.PORT || 3000, function() {
   console.log("Your app is listening on port  " + listener.address().port);
 });
