@@ -13,10 +13,11 @@
     </div>
 
     <ol>
-    {%for pokemons in pokemon%}
-      <p class = "name"> name: {{pokemons.data.name}} </p>
-      <img src = "{{pokemons.data.sprites["front_default"]}}">
-
+    {%for pokemon in pokemons%}
+      <p class = "name"> {{pokemon.data.name}} </p>
+      <img  class = "image" src = "{{pokemon.data.sprites["front_default"]}}">
+      <p class = "type"> {%for type in pokemon.data.types%} {{type.type.name}} {%endfor%}</p>
+      <hr>
     {%endfor%}
     </ol>
     <script src="../client.js"></script>

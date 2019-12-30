@@ -14,19 +14,17 @@ app.get("/", async function(req, res) {
   console.log("Someone is requesting the page /");
   const url = "https://pokeapi.co/api/v2/pokemon/";
   const pokemonList = await axios.get(url);
-  console.log(pokemonList);
   const promises = pokemonList.data.results.map(pokemon =>
     axios.get(pokemon.url)
   );
-  const pokemons = await Promise.all(promises);
-  console.log(pokemons);
+  const pokemon = await Promise.all(promises);
   res.render("index.html", {
-    pokemon: pokemons
+    pokemons: pokemon
   });
 });
 
 app.get("/pokemon/:id", async (req, res) => {
-  console.log("Someone is request a pokemon");
+  console.log("Someone is requesting a pokemon");
   const id = req.params.id;
   const pokemon = await getPokemon(id);
   const moves = [];
