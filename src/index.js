@@ -11,15 +11,20 @@ nunjucks.configure("views", {
 app.use(express.static("public"));
 
 app.get("/", async function(req, res) {
+  console.log(req.query.page);
+  const page = parseInt(req.query.page) || 0; //req.query returns a string !
+  const limit = 20;
+  const offset = page * limit;
   console.log("Someone is requesting the page /");
-  const url = "https://pokeapi.co/api/v2/pokemon/";
+  const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
   const pokemonList = await axios.get(url);
   const promises = pokemonList.data.results.map(pokemon =>
     axios.get(pokemon.url)
   );
   const pokemon = await Promise.all(promises);
   res.render("index.html", {
-    pokemons: pokemon
+    pokemons: pokemon,
+    page
   });
 });
 
