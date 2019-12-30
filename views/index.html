@@ -14,8 +14,10 @@
 
     <ol>
     {%for pokemon in pokemons%}
+      <a href = "/pokemon/{{pokemon.data.id}}">
       <p class = "name"> {{pokemon.data.name}} </p>
       <img  class = "image" src = "{{pokemon.data.sprites["front_default"]}}">
+      </a>
       <p class = "type"> {%for type in pokemon.data.types%} {{type.type.name}} {%endfor%}</p>
       <hr>
     {%endfor%}
