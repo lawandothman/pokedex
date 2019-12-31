@@ -21,8 +21,13 @@
       <p class = "type"> {%for type in pokemon.data.types%} {{type.type.name}} {%endfor%}</p>
       <hr>
     {%endfor%}
-    <a href = "/?page={{page-1}}"> Previous </a>
-    <a href = "/?page={{page+1}}"> Next </a>
+
+    {% if (page-1) >= 0%}
+        <a href = "/?page={{page-1}}"> Previous </a>
+    {%endif%}
+    {%if (page+1) < maxNumOfPages%}
+        <a href = "/?page={{page+1}}"> Next </a>
+    {%endif%}
     </ol>
     <script src="../client.js"></script>
 </body>

@@ -18,13 +18,16 @@ app.get("/", async function(req, res) {
   console.log("Someone is requesting the page /");
   const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
   const pokemonList = await axios.get(url);
+  const maxNumOfPokemons = pokemonList.data.count;
+  const maxNumOfPages = Math.ceil(maxNumOfPokemons / limit);
   const promises = pokemonList.data.results.map(pokemon =>
     axios.get(pokemon.url)
   );
   const pokemon = await Promise.all(promises);
   res.render("index.html", {
     pokemons: pokemon,
-    page
+    page,
+    maxNumOfPages
   });
 });
 
