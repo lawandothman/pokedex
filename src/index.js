@@ -11,11 +11,10 @@ nunjucks.configure("views", {
 app.use(express.static("public"));
 
 app.get("/", async function(req, res) {
-  console.log(req.query.page);
   const page = parseInt(req.query.page) || 0; //req.query returns a string !
+  console.log(`Someone is requesting the page ${page}`);
   const limit = 20;
   const offset = page * limit;
-  console.log("Someone is requesting the page /");
   const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
   const pokemonList = await axios.get(url);
   const maxNumOfPokemons = pokemonList.data.count;
@@ -55,5 +54,5 @@ async function getPokemon(id) {
 }
 
 const listener = app.listen(process.env.PORT || 3000, function() {
-  console.log("  Your app is listening on port  " + listener.address().port);
+  console.log("Your app is listening on port  " + listener.address().port);
 });
