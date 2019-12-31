@@ -10,13 +10,28 @@ nunjucks.configure("views", {
 
 app.use(express.static("public"));
 
-app.get("/", function(request, response) {
-  console.log("Someone is requesting the page /");
-  response.render("index.html");
+app.get("/", async function(req, res) {
+  const page = parseInt(req.query.page) || 0; //req.query returns a string !
+  console.log(`Someone is requesting the page ${page}`);
+  const limit = 20;
+  const offset = page * limit;
+  const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
+  const pokemonList = await axios.get(url);
+  const maxNumOfPokemons = pokemonList.data.count;
+  const maxNumOfPages = Math.ceil(maxNumOfPokemons / limit);
+  const promises = pokemonList.data.results.map(pokemon =>
+    axios.get(pokemon.url)
+  );
+  const pokemon = await Promise.all(promises);
+  res.render("index.html", {
+    pokemons: pokemon,
+    page,
+    maxNumOfPages
+  });
 });
 
 app.get("/pokemon/:id", async (req, res) => {
-  console.log("Someone is request a pokemon");
+  console.log("Someone is requesting a pokemon");
   const id = req.params.id;
   const pokemon = await getPokemon(id);
   const moves = [];
