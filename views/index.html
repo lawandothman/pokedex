@@ -14,14 +14,17 @@
       src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
     />
   </head>
-  <body>
+
+
+  <body class = "has-background-grey-lighter">
     <div class="container">
       <div class="block">
         <h1 class="title is-1">Pokédex</h1>
       </div>
+    </div>
 
       <div class="container">
-        <ol>
+        <ol class = "card">
           {%for pokemon in pokemons%}
           <a href="/pokemon/{{pokemon.data.id}}">
             <p class="name">{{pokemon.data.name}}</p>
@@ -36,15 +39,21 @@
       </div>
 
       <div class="container">
-        <nav class="pagination">
           {% if (page-1) >= 0%}
-          <a href="/?page={{page-1}}" class="pagination-previous"> Previous </a>
-          {%endif%} {%if (page+1) < maxNumOfPages%}
-          <a href="/?page={{page+1}}" class="pagination-next"> Next </a>
+          <button class = "button is-primary">
+          <a href="/?page={{page-1}}"> Previous </a>
+          </button>
+          {% else %}
+          <button class = "button is-primary" diasbled> Previous </button>
           {%endif%}
-        </nav>
+          {%if (page+1) < maxNumOfPages%}
+          <button class = "button is-primary">
+          <a href="/?page={{page+1}}"> Next </a>
+          </button>
+          {% else %}
+          <button class = "button is-primary" disabled> Next </button>
+          {%endif%}
       </div>
       <script src="../client.js"></script>
-    </div>
   </body>
 </html>
