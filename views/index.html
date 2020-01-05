@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My Pokédex</title>
+    <link rel = "stylesheet" type = "text/css" href = "/style.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
@@ -24,8 +25,10 @@
     </div>
 
       <div class="container">
-        <ol class = "card">
+        <ol class = "pokedex" >
+        
           {%for pokemon in pokemons%}
+          <li class = "pokemon-card">
           <a href="/pokemon/{{pokemon.data.id}}">
             <p class="name">{{pokemon.data.name}}</p>
             <img class = "image" src =
@@ -35,6 +38,7 @@
             {%for type in pokemon.data.types%} {{type.type.name}} {%endfor%}
             {%endfor%}
           </p>
+          </li>
         </ol>
       </div>
 

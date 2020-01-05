@@ -1,4 +1,38 @@
-.cards .name {
-  color: red;
+body {
+  margin: 0;
+}
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.type {
   text-transform: capitalize;
+  margin: auto;
+  text-align: center;
+}
+
+.pokedex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.pokemon-card {
+  list-style: none;
+  padding: 40px;
+  border-style: solid;
+}
+
+.name {
+  text-transform: uppercase;
+  margin: auto;
+  text-align: center;
+}
+
+.image {
+  height: 180px;
 }
