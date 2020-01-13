@@ -27,7 +27,7 @@ body {
   border-style: solid;
   margin: 10px;
   color: red;
-  background-color: white;
+  background-color: #f4976c;
   border-radius: 10px;
 }
 .pokemon-card:hover {
@@ -43,4 +43,8 @@ body {
 .image {
   height: 180px;
   opacity: 1;
+}
+
+.type {
+  color: white;
 }
