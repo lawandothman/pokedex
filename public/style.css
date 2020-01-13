@@ -25,6 +25,13 @@ body {
   list-style: none;
   padding: 40px;
   border-style: solid;
+  margin: 10px;
+  color: red;
+  background-color: white;
+  border-radius: 10px;
+}
+.pokemon-card:hover {
+  border-style: double;
 }
 
 .name {
@@ -35,4 +42,5 @@ body {
 
 .image {
   height: 180px;
+  opacity: 1;
 }
