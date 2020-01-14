@@ -24,14 +24,14 @@ body {
 .pokemon-card {
   list-style: none;
   padding: 40px;
-  border-style: solid;
-  margin: 10px;
-  color: red;
-  background-color: #f4976c;
-  border-radius: 10px;
+  margin: 30px;
+  background-color: white;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.09);
+  transition: 0.3s ease-in-out;
+  border-radius: 2px;
 }
 .pokemon-card:hover {
-  border-style: double;
+  box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.1);
 }
 
 .name {
@@ -46,5 +46,5 @@ body {
 }
 
 .type {
-  color: white;
+  color: black;
 }
