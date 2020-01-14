@@ -44,18 +44,14 @@
 
       <div class="container">
           {% if (page-1) >= 0%}
-          <button class = "button is-primary">
-          <a href="/?page={{page-1}}"> Previous </a>
-          </button>
+          <a class = "button is-primary" href="/?page={{page-1}}"> Previous </a>
           {% else %}
-          <button class = "button is-primary" diasbled> Previous </button>
+          <button class = "button is-static" diasbled> Previous </button>
           {%endif%}
           {%if (page+1) < maxNumOfPages%}
-          <button class = "button is-primary">
-          <a href="/?page={{page+1}}"> Next </a>
-          </button>
+          <a class = "button is-primary" href="/?page={{page+1}}"> Next </a>
           {% else %}
-          <button class = "button is-primary" disabled> Next </button>
+          <button class = "button is-static" disabled> Next </button>
           {%endif%}
       </div>
       <script src="../client.js"></script>
