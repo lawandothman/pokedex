@@ -10,6 +10,8 @@ body {
   text-transform: capitalize;
   margin: auto;
   text-align: center;
+  text-transform: uppercase;
+  color: white;
 }
 
 .pokedex {
@@ -42,32 +44,43 @@ body {
 
 .image {
   height: 180px;
-  opacity: 1;
-}
-
-.type {
-  color: black;
 }
 
 .fire {
-  color: red;
+  background-color: #fd7d24;
+  margin-left: auto;
+  padding: 2px 3px;
+  border-radius: 10px;
 }
 
 .flying {
-  color: skyblue;
+  background-color: #80d7d9;
+  margin: auto;
+  padding: 2px 3px;
+  border-radius: 10px;
 }
-
 .electric {
-  color: purple;
+  background-color: #eed535;
+  padding: 2px 3px;
+  border-radius: 10px;
 }
-
-.dragon {
-  color: orange;
-}
-
 .grass {
-  color: green;
+  background-color: #57ba7d;
+  padding: 2px 3px;
+  border-radius: 10px;
 }
 .water {
-  color: blue;
+  background-color: #4592c4;
+  padding: 2px 3px;
+  border-radius: 10px;
+}
+.psychic {
+  background-color: #f366b9;
+  padding: 2px 3px;
+  border-radius: 10px;
+}
+.fighting {
+  background-color: #d56723;
+  padding: 2px 3px;
+  border-radius: 10px;
 }
