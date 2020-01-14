@@ -48,3 +48,26 @@ body {
 .type {
   color: black;
 }
+
+.fire {
+  color: red;
+}
+
+.flying {
+  color: skyblue;
+}
+
+.electric {
+  color: purple;
+}
+
+.dragon {
+  color: orange;
+}
+
+.grass {
+  color: green;
+}
+.water {
+  color: blue;
+}

@@ -34,8 +34,11 @@
             <img class = "image" src =
             "{{pokemon.data.sprites["front_default"]}}" onerror = "this.src='https://www.brooklinelibrary.org/wp-content/uploads/2016/07/2000px-Poké_Ball.svg_-1.png'">
           </a>
-          <p class="type">
-            {%for type in pokemon.data.types%} {{type.type.name}} {%endfor%}
+          <div class="type">
+            {%for type in pokemon.data.types%}
+             <span class = "{{type.type.name}}"> {{type.type.name}}  
+             {%endfor%}
+             </span>
             {%endfor%}
           </p>
           </li>
