@@ -55,9 +55,8 @@ body {
   background: rgb(0, 212, 255);
   background: linear-gradient(
     180deg,
-    rgba(0, 212, 255, 1) 0%,
-    rgba(14, 80, 121, 1) 49%,
-    rgba(195, 195, 195, 1) 100%
+    rgba(0, 212, 255, 1) 40%,
+    rgba(195, 195, 195, 1) 60%
   );
 }
 .electric {
@@ -85,9 +84,8 @@ body {
   background: rgb(255, 197, 99);
   background: linear-gradient(
     180deg,
-    rgba(255, 197, 99, 1) 44%,
-    rgba(107, 65, 31, 1) 71%,
-    rgba(240, 134, 83, 1) 100%
+    rgba(255, 197, 99, 1) 40%,
+    rgba(240, 134, 83, 1) 60%
   );
 }
 .fairy {
@@ -100,8 +98,8 @@ body {
   background: rgb(126, 57, 57);
   background: linear-gradient(
     180deg,
-    rgba(99, 175, 200, 1) 43%,
-    rgba(126, 57, 57, 1) 77%
+    rgba(99, 175, 200, 1) 40%,
+    rgba(126, 57, 57, 1) 60%
   );
 }
 .steel {
