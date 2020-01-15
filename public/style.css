@@ -1,5 +1,121 @@
-* {
-    font-family: sans-serif;
-    color: #222;
-    
+body {
+  margin: 0;
+}
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.type {
+  text-transform: capitalize;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin: 0px 5px 0px 5px;
+}
+
+.pokedex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.pokemon-card {
+  list-style: none;
+  padding: 40px;
+  margin: 30px;
+  background-color: white;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.09);
+  transition: 0.3s ease-in-out;
+  border-radius: 2px;
+}
+.pokemon-card:hover {
+  box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  text-transform: uppercase;
+  margin: auto;
+  text-align: center;
+}
+
+.image {
+  height: 180px;
+  margin: 10px 0px 10px 0px;
+}
+
+.fire {
+  background-color: #fd7d24;
+}
+
+.flying {
+  background: rgb(0, 212, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 212, 255, 1) 40%,
+    rgba(195, 195, 195, 1) 60%
+  );
+}
+.electric {
+  background-color: #eed535;
+}
+.grass {
+  background-color: #57ba7d;
+}
+.water {
+  background-color: #4592c4;
+}
+.psychic {
+  background-color: #f366b9;
+}
+.fighting {
+  background-color: #d56723;
+}
+.bug {
+  background-color: #b05cfa;
+}
+.normal {
+  background-color: #959396;
+}
+.dragon {
+  background: rgb(255, 197, 99);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 197, 99, 1) 40%,
+    rgba(240, 134, 83, 1) 60%
+  );
+}
+.fairy {
+  background-color: #fdb9e9;
+}
+.rock {
+  background-color: #948c5c;
+}
+.ground {
+  background: rgb(126, 57, 57);
+  background: linear-gradient(
+    180deg,
+    rgba(99, 175, 200, 1) 40%,
+    rgba(126, 57, 57, 1) 60%
+  );
+}
+.steel {
+  background-color: #9eb7b8;
+}
+.ice {
+  background-color: #51c4e7;
+}
+.ghost {
+  background-color: #7b62a3;
+}
+.dark {
+  background-color: #332f2f;
+}
+.poison {
+  background-color: #b97fc9;
 }
