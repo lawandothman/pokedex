@@ -1,3 +1,4 @@
+/*Home Page*/
 body {
   margin: 0;
 }
@@ -118,4 +119,14 @@ body {
 }
 .poison {
   background-color: #b97fc9;
+}
+
+/* Pokemon Page*/
+
+li {
+  list-style-type: none;
+}
+
+.card-title {
+  text-transform: uppercase;
 }
