@@ -1,7 +1,6 @@
 # Pokédex
 
-A live Pokédex web application in JavaScript, HTML and CSS and deployed using  
-[Heroku app](https://www.heroku.com/).
+A live Pokédex web application in JavaScript, HTML and CSS and deployed using [Heroku app](https://www.heroku.com/).
 
 ![image](https://user-images.githubusercontent.com/58405138/73666687-15edc280-469b-11ea-9ee4-8465515b3233.png)
 
