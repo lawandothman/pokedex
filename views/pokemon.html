@@ -4,7 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Pokémon</title>
+      <title class = "pokeman-name">{{pokemon.name | upper}}</title>
       <link rel="stylesheet" href="../style.css">
        <link
       rel="stylesheet"
@@ -19,37 +19,41 @@
 
 
   <body>
-    <div class="container">
-      <div class="block">
         <a href ="/">
          <h1 class="title is-1">Pokédex</h1>
          </a>
-      </div>
-    </div>
-
-    <li class = "PokemonCard">
-      <img class = "card-image" src="{{pokemon.sprites.front_default}}">
-      <h2 class = "card-title">{{pokemon.id}} {{pokemon.name}}</h2>
-      <p class = "card-weight"> Weight: {{pokemon.weight/10}} kg </p>
-      <p class = "card-height"> Height: {{pokemon.height/10}} m </p>
-      <p class = "card-type">Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}</p>
-    </li>
+    
+    
+    <div class = "container">
       
-    {#page links#}
-    <a href="/pokemon/{{pokemon.id - 1}}">Previous</a>
-    <a href="/">Pokédex</a> 
-    <a href="/pokemon/{{pokemon.id + 1}}">Next</a>
-    <hr>
+      <img height = "300" width = "300" src="{{pokemon.sprites.front_default}}">
 
-    {%for move in moves%}
-      <p class = "move-name"> move name: {{move.data.name}} </p>
-      <p> type: {{move.data.type.name}} </p>
-      <p> power : {{move.data.power or '100'}} </p>
-      <p> damage class: {{move.data.damage_class.name}} </p>
-      <p> accuracy: {{move.data.accuracy or '100'}} %</p>
-      <p> power point: {{move.data.pp}} </p>
+      <li class = "PokemonCard">
+      
+        <h2 class = "pokeman-name">{{pokemon.id}} {{pokemon.name}}</h2>
+        <p class = "card-weight"> Weight: {{pokemon.weight/10}} kg </p>
+        <p class = "card-height"> Height: {{pokemon.height/10}} m </p>
+        <p class = "card-type">Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}</p>
+      </li>
       <hr>
-    {%endfor%}
+
+      {%for move in moves%}
+        <p class = "move-name"> move name: {{move.data.name}} </p>
+        <p> type: {{move.data.type.name}} </p>
+        <p> power : {{move.data.power or '100'}} </p>
+        <p> damage class: {{move.data.damage_class.name}} </p>
+        <p> accuracy: {{move.data.accuracy or '100'}} %</p>
+        <p> power point: {{move.data.pp}} </p>
+        <hr>
+      {%endfor%}
+  </div>
+
+  <div class = "container">
+
+    <a class = "button is-primary" href="/pokemon/{{pokemon.id - 1}}">Previous</a>
+    <a class = "button is-primary" href="/pokemon/{{pokemon.id + 1}}">Next</a>
+    <hr>
+  </div>
 
   </body>
   
