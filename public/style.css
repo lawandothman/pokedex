@@ -127,6 +127,14 @@ li {
   list-style-type: none;
 }
 
-.card-title {
+.pokeman-name {
   text-transform: uppercase;
+}
+
+.pokemon-image {
+  margin: 100px;
+}
+
+.title {
+  text-align: center;
 }
