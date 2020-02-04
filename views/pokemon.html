@@ -22,17 +22,26 @@
     </a>
 
     <div class="container">
-      <img height="300" width="300" src="{{pokemon.sprites.front_default}}" />
 
-      <li class="PokemonCard">
-        <h2 class="pokeman-name">{{pokemon.id}} {{pokemon.name}}</h2>
-        <p class="card-weight">Weight: {{pokemon.weight/10}} kg</p>
-        <p class="card-height">Height: {{pokemon.height/10}} m</p>
-        <p class="card-type">
-          Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}
-        </p>
-      </li>
-      <hr />
+      <div class = "columns">
+
+        <div class = "info column">
+          <h2 class="pokeman-name title is-3">{{pokemon.name}}</h2>
+          <p class="card-weight">Weight: {{pokemon.weight/10}} kg</p>
+          <p class="card-height">Height: {{pokemon.height/10}} m</p>
+          <p class="card-type">
+            Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}
+          </p>
+        </div>
+
+        
+        <div class= "pokemon-image column">
+          <img height="300" width="300" src="{{pokemon.sprites.front_default}}" />
+        </div>
+
+        
+      </div>
+      
 
       {%for move in moves%}
       <p class="move-name">move name: {{move.data.name}}</p>
