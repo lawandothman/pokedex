@@ -17,32 +17,32 @@
   </head>
 
   <body>
+  <div class = "container">
     <a href="/">
       <h1 class="title is-1">Pokédex</h1>
     </a>
+    </div>
 
     <div class="container">
 
       <div class = "columns">
 
-        <div class = "info column">
+        <div class = "info column is-two-thirds">
           <h2 class="pokeman-name title is-3">{{pokemon.name}}</h2>
           <p class="card-weight">Weight: {{pokemon.weight/10}} kg</p>
           <p class="card-height">Height: {{pokemon.height/10}} m</p>
           <p class="card-type">
-            Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}
+            Type(s):{%for type in pokemon.types%} 
+              <span class = "type {{type.type.name}}"> {{type.type.name}}</span> 
+            {%endfor%}
           </p>
         </div>
 
-        
         <div class= "pokemon-image column">
           <img height="300" width="300" src="{{pokemon.sprites.front_default}}" />
         </div>
-
-        
       </div>
       
-
       {%for move in moves%}
       <p class="move-name">move name: {{move.data.name}}</p>
       <p>type: {{move.data.type.name}}</p>
