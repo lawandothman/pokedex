@@ -134,3 +134,11 @@ li {
 .title {
   text-align: center;
 }
+.pokemon-image {
+  box-shadow: 5px 5px 5px 3px rgba(91, 141, 223, 0.4);
+  border-radius: 10px;
+  margin: 30px;
+}
+.info {
+  margin: 30px;
+}
