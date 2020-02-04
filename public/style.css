@@ -1,4 +1,5 @@
 /*Home Page*/
+
 body {
   margin: 0;
 }
@@ -122,16 +123,14 @@ body {
 }
 
 /* Pokemon Page*/
-
 li {
   list-style-type: none;
 }
-
+.title {
+  text-align: center;
+}
 .pokeman-name {
   text-transform: uppercase;
-}
-
-.title {
   text-align: left;
 }
 .pokemon-image {
@@ -139,5 +138,37 @@ li {
 }
 .info {
   text-align: left;
-  margin: 80px 0px 50px 0px;
+  margin: 80px 0px 50px 10px;
+  padding-left: 10px;
+  word-spacing: 2px;
+}
+
+.moves {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card {
+  margin: 20px;
+  padding: 20px;
+  line-height: 2rem;
+  text-align: left;
+}
+
+.moves-title {
+  text-align: left;
+  padding-left: 20px;
+  margin-top: 20px;
+}
+
+.move-name {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 200;
+  text-align: center;
+}
+.move-damage-class {
+  text-transform: capitalize;
 }
