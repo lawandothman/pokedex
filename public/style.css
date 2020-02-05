@@ -1,3 +1,5 @@
+/*Home Page*/
+
 body {
   margin: 0;
 }
@@ -43,10 +45,10 @@ body {
   margin: auto;
   text-align: center;
 }
-
 .image {
   height: 180px;
   margin: 10px 0px 10px 0px;
+  width: 180px;
 }
 
 .fire {
@@ -118,4 +120,71 @@ body {
 }
 .poison {
   background-color: #b97fc9;
+}
+
+/* Pokemon Page*/
+li {
+  list-style-type: none;
+}
+.title {
+  text-align: center;
+}
+.pokeman-name {
+  text-transform: uppercase;
+  text-align: left;
+}
+.pokemon-image {
+  margin: 30px;
+}
+.info {
+  text-align: left;
+  margin: 100px 0px 50px 100px;
+  padding-left: 10px;
+  word-spacing: 2px;
+}
+
+.moves {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: max-content;
+  height: max-content;
+  justify-content: center;
+}
+
+.card {
+  margin: 20px;
+  padding: 20px;
+  line-height: 2rem;
+  text-align: left;
+  width: 250px;
+  height: 250px;
+}
+
+.moves-title {
+  text-align: left;
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-left: 60px;
+}
+
+.move-name {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 200;
+  text-align: center;
+}
+.move-damage-class {
+  text-transform: capitalize;
+}
+
+.move-type {
+  text-align: center;
+}
+
+span {
+  margin-left: 10px;
 }

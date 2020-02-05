@@ -1,41 +1,86 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Pokémon</title>
-      <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title class="pokeman-name">{{pokemon.name | upper}}</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <script src="https://kit.fontawesome.com/225aeb8e22.js" crossorigin="anonymous">
+    </script>
   </head>
 
-
-
   <body>
-  
-    <li class = "PokemonCard">
-      <img class = "card-image" src="{{pokemon.sprites.front_default}}">
-      <h2 class = "card-title">{{pokemon.id}} {{pokemon.name}}</h2>
-      <p class = "card-weight"> Weight: {{pokemon.weight/10}} kg </p>
-      <p class = "card-height"> Height: {{pokemon.height/10}} m </p>
-      <p class = "card-type">Type: {%for type in pokemon.types%} {{type.type.name}} {%endfor%}</p>
-    </li>
+  <div class = "container">
+    <a href="/">
+      <h1 class="title is-1">Pokédex</h1>
+    </a>
+    </div>
+
+    <div class="container">
+      <div class = "columns">
+          <div class= "pokemon-image column is-two-thirds">
+          <img height="300" width="300" src="{{pokemon.sprites.front_default}}" />
+        </div>
+        <div class = "info column">
+          <h2 class="pokeman-name title is-3">{{pokemon.name}}</h2>
+          <p>Weight:  {{pokemon.weight/10}} kg</p>
+          <p>Height:  {{pokemon.height/10}} m</p>
+          <p>
+            Type(s):{%for type in pokemon.types%} 
+              <span class = "type {{type.type.name}}"> {{type.type.name}}</span> 
+            {%endfor%}
+          </p>
+        </div>
+
+        
+      </div>
+
+      <div class = "container">
+        <h3 class = "moves-title title is-4">MOVES</h3>
+      </div>
+
+      <div class = "moves container">
+        {%for move in moves%}
+          <div class = "card">
+              <p class="move-name"> {{move.data.name}}
+                {% if (move.data.damage_class.name) === "status" %}
+                <span class="fas fa-record-vinyl"></span>
+                {% elif (move.data.damage_class.name) === "special" %}
+                <span class="fas fa-bolt"></span>
+                {% else %}
+                <span class="fas fa-bahai"></span>
+                {% endif %}
+              </p>
+              <p class = " move-power"> <b>Power :</b> {{move.data.power or '100'}}</p>
+              <p class = " move-accuracy"><b>Acc:</b> {{move.data.accuracy or '100'}} % 
+              
+                <progress class="progress is-primary" value="{{move.data.accuracy or '100'}}" max="100">
+               {{move.data.accuracy or '100'}} %</progress>
+              
+                
+              </p>
+              <p class = " move-pp"> <b>PP:</b> {{move.data.pp}}</p>
+              <p class = "move-damage-class"></p>
+              <p class = " move-type">
+                  <span class = "type {{move.data.type.name}}"> {{move.data.type.name}} </span>
+              </p>
+          </div>
+        {%endfor%}
+        </div>
       
-    {#page links#}
-    <a href="/pokemon/{{pokemon.id - 1}}">Previous</a>
-    <a href="/">Pokédex</a> 
-    <a href="/pokemon/{{pokemon.id + 1}}">Next</a>
-    <hr>
 
-    {%for move in moves%}
-      <p class = "move-name"> move name: {{move.data.name}} </p>
-      <p> type: {{move.data.type.name}} </p>
-      <p> power : {{move.data.power or '100'}} </p>
-      <p> damage class: {{move.data.damage_class.name}} </p>
-      <p> accuracy: {{move.data.accuracy or '100'}} %</p>
-      <p> power point: {{move.data.pp}} </p>
-      <hr>
-    {%endfor%}
+    </div>
 
+    <div class="container">
+      <a class="button is-primary" href="/pokemon/{{pokemon.id - 1}}"
+        >Previous</a
+      >
+      <a class="button is-primary" href="/pokemon/{{pokemon.id + 1}}">Next</a>
+    </div>
   </body>
-  
 </html>
