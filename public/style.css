@@ -45,7 +45,6 @@ body {
   margin: auto;
   text-align: center;
 }
-
 .image {
   height: 180px;
   margin: 10px 0px 10px 0px;
@@ -148,6 +147,10 @@ li {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: max-content;
+  height: max-content;
 }
 
 .card {
@@ -171,4 +174,12 @@ li {
 }
 .move-damage-class {
   text-transform: capitalize;
+}
+
+.move-type {
+  text-align: center;
+}
+
+span {
+  margin-left: 10px;
 }

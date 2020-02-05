@@ -10,10 +10,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
     />
-    <link
-      rel="stylesheet"
-      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
-    />
+    <script src="https://kit.fontawesome.com/225aeb8e22.js" crossorigin="anonymous">
+    </script>
   </head>
 
   <body>
@@ -48,12 +46,20 @@
       <div class = "moves container">
         {%for move in moves%}
           <div class = "card">
-              <p class="move-name"> {{move.data.name}}</p>
-              <p class = " move-power">Power : {{move.data.power or '100'}}</p>
-              <p class = " move-damage-class">Damage Class: {{move.data.damage_class.name}}</p>
-              <p class = " move-accuracy">Accuracy: {{move.data.accuracy or '100'}} %</p>
-              <p class = " move-pp">Power Point: {{move.data.pp}}</p>
-              <p class = " move-type">Type: 
+              <p class="move-name"> {{move.data.name}}
+                {% if (move.data.damage_class.name) === "status" %}
+                <span class="fas fa-record-vinyl"></span>
+                {% elif (move.data.damage_class.name) === "special" %}
+                <span class="fas fa-bolt"></span>
+                {% else %}
+                <span class="fas fa-bahai"></span>
+                {% endif %}
+              </p>
+              <p class = " move-power"> <b>Power :</b> {{move.data.power or '100'}}</p>
+              <p class = " move-accuracy"><b>Acc:</b> {{move.data.accuracy or '100'}} %</p>
+              <p class = " move-pp"> <b>PP:</b> {{move.data.pp}}</p>
+              <p class = "move-damage-class"></p>
+              <p class = " move-type">
                   <span class = "type {{move.data.type.name}}"> {{move.data.type.name}} </span>
               </p>
           </div>
