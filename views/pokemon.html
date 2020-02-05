@@ -56,7 +56,7 @@
                 {% endif %}
               </p>
               <p class = " move-power"> <b>Power :</b> {{move.data.power or '100'}}</p>
-              <p class = " move-accuracy"><b>Acc:</b>
+              <p class = " move-accuracy"><b>Acc:</b> {{move.data.accuracy or '100'}} % 
               
                 <progress class="progress is-primary" value="{{move.data.accuracy or '100'}}" max="100">
                {{move.data.accuracy or '100'}} %</progress>
