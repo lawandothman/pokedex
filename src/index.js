@@ -40,10 +40,12 @@ app.get("/pokemon/:id", async (req, res) => {
   }
   const resolvePromises = await Promise.all(moves);
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
-  const species = await axios.get(url);
-  const evoChainUrl = species.data.evolution_chain.url;
-  const evoChain = await axios.get(evoChainUrl);
-  console.log(evoChain);
+  const speciesData = await axios.get(url);
+  const evolution = await axios.get(speciesData.data.evolution_chain.url);
+  const evoData = evolution.data.chain;
+  // const evoChain = []; need to fill this with data
+  let numberOfEvolutions = evoData.evolves_to.length;
+  console.log(numberOfEvolutions);
   res.render("pokemon.html", {
     number: id,
     pokemon,
