@@ -39,6 +39,9 @@ app.get("/pokemon/:id", async (req, res) => {
     moves.push(axios.get(move.move.url));
   }
   const resolvePromises = await Promise.all(moves);
+  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
+  const species = await axios.get(url);
+  console.log(species);
   res.render("pokemon.html", {
     number: id,
     pokemon,
