@@ -2,6 +2,7 @@ const express = require("express");
 const nunjucks = require("nunjucks");
 const axios = require("axios");
 const app = express();
+const pokeService = require("./pokeService");
 
 nunjucks.configure("views", {
   autoescape: true,
@@ -33,7 +34,7 @@ app.get("/", async function(req, res) {
 app.get("/pokemon/:id", async (req, res) => {
   console.log("Someone is requesting a pokemon");
   const id = req.params.id;
-  const pokemon = await getPokemon(id);
+  const pokemon = await pokeService.getPokemon(id);
   const moves = [];
   for (move of pokemon.moves) {
     moves.push(axios.get(move.move.url));
@@ -45,13 +46,6 @@ app.get("/pokemon/:id", async (req, res) => {
     moves: resolvePromises
   });
 });
-
-async function getPokemon(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const res = await axios.get(url);
-  const pokemon = res.data;
-  return pokemon;
-}
 
 const listener = app.listen(process.env.PORT || 3000, function() {
   console.log("Your app is listening on port  " + listener.address().port);
