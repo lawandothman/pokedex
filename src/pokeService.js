@@ -7,4 +7,14 @@ async function getPokemon(id) {
   return pokemon;
 }
 
-module.exports = { getPokemon };
+async function getPokemonMoves(id) {
+  const pokemon = await getPokemon(id);
+  const moves = [];
+  for (move of pokemon.moves) {
+    moves.push(axios.get(move.move.url));
+  }
+  const resolvePromises = await Promise.all(moves);
+  return resolvePromises;
+}
+
+module.exports = { getPokemon, getPokemonMoves };
