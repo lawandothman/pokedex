@@ -1,6 +1,5 @@
 const express = require("express");
 const nunjucks = require("nunjucks");
-const axios = require("axios");
 const app = express();
 const pokeService = require("./pokeService");
 
@@ -14,18 +13,10 @@ app.use(express.static("public"));
 app.get("/", async function(req, res) {
   const page = parseInt(req.query.page) || 0; //req.query returns a string !
   console.log(`Someone is requesting the page ${page}`);
-  const limit = 20;
-  const offset = page * limit;
-  const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
-  const pokemonList = await axios.get(url);
-  const maxNumOfPokemons = pokemonList.data.count;
-  const maxNumOfPages = Math.ceil(maxNumOfPokemons / limit);
-  const promises = pokemonList.data.results.map(pokemon =>
-    axios.get(pokemon.url)
-  );
-  const pokemon = await Promise.all(promises);
+  const maxNumOfPages = (await pokeService.getPokemonList(page)).maxNumOfPages;
+  const pokemons = (await pokeService.getPokemonList(page)).pokemons;
   res.render("index.html", {
-    pokemons: pokemon,
+    pokemons,
     page,
     maxNumOfPages
   });
