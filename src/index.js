@@ -14,7 +14,6 @@ app.get("/", async function(req, res) {
   const page = parseInt(req.query.page) || 0; //req.query returns a string !
   console.log(`Someone is requesting the page ${page}`);
   const pokemonList = await pokeService.getPokemonList(page)
-  console.log (pokemonList)
   const pokemons = pokemonList.pokemons
   const maxNumOfPages = pokemonList.maxNumOfPages
   res.render("index.html", {
