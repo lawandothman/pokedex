@@ -28,9 +28,10 @@ app.get("/pokemon/:id", async (req, res) => {
   const id = req.params.id;
   const pokemon = await pokeService.getPokemon(id);
   const moves = await pokeService.getPokemonMoves(id);
+  const evoChain = await pokeService.getPokemonEvoChain(id);
   res.render("pokemon.html", {
     pokemon,
-    moves
+    moves, evoChain
   });
 });
 
