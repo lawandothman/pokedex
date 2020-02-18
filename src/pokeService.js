@@ -16,6 +16,13 @@ async function getPokemonMoves(id) {
   const resolvePromises = await Promise.all(moves);
   return resolvePromises;
 }
+async function getPokemonEvoChain(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+  const species = await axios.get(url);
+  const evoChainUrl = species.data.evolution_chain.url;
+  const evoChain = await axios.get(evoChainUrl);
+  console.log(evoChain);
+}
 
 async function getPokemonList(page) {
   const limit = 20;
@@ -34,4 +41,4 @@ async function getPokemonList(page) {
   };
 }
 
-module.exports = { getPokemon, getPokemonMoves, getPokemonList };
+module.exports = { getPokemon, getPokemonMoves, getPokemonList, getPokemonEvoChain };
