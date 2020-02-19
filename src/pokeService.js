@@ -20,8 +20,14 @@ async function getPokemonEvoChain(id) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
   const species = await axios.get(url);
   const evoChainUrl = species.data.evolution_chain.url;
-  const evoChain = await axios.get(evoChainUrl);
-  console.log(evoChain);
+  const evoChains = await axios.get(evoChainUrl);
+  const evoData = evoChains.data.chain;
+  const numberOfEvolutions = evoData['evolves_to'].length;
+  const evoChain = [];
+  evoChain.push({
+    "species_name": evoData.species.name,
+  })
+  console.log(evoChain, numberOfEvolutions)
 }
 
 async function getPokemonList(page) {
