@@ -21,19 +21,17 @@ async function getPokemonEvoChain(id) {
   const species = await axios.get(url);
   const evoChainUrl = species.data.evolution_chain.url;
   const evoChains = await axios.get(evoChainUrl);
-  const evoData = evoChains.data.chain;
+  let evoData = evoChains.data.chain;
+  const numOfEvolutions = evoData.evolves_to.length;
   const evoChain = [];
-  const numberOfEvolutions = evoData["evolves_to"].length;
-  if (numberOfEvolutions > 1) {
-    for (let i = 1; i < numberOfEvolutions; i++) {
-      evoChain.push({
-        "species-name": evoData["evolves_to"][i].species.name
-      });
-    }
-  }
-  evoChain.push(evoData.evolves_to[0].species.name);
+  do {
+    evoChain.push({
+      name: evoData.species.name
+    });
 
-  console.log(evoChain, numberOfEvolutions);
+    evoData = evoData["evolves_to"][0];
+  } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
+  console.log(evoChain, numOfEvolutions);
 }
 
 async function getPokemonList(page) {
