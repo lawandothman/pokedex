@@ -10,12 +10,12 @@ nunjucks.configure("views", {
 
 app.use(express.static("public"));
 
-app.get("/", async function (req, res) {
+app.get("/", async function(req, res) {
   const page = parseInt(req.query.page) || 0; //req.query returns a string !
   console.log(`Someone is requesting the page ${page}`);
-  const pokemonList = await pokeService.getPokemonList(page)
-  const pokemons = pokemonList.pokemons
-  const maxNumOfPages = pokemonList.maxNumOfPages
+  const pokemonList = await pokeService.getPokemonList(page);
+  const pokemons = pokemonList.pokemons;
+  const maxNumOfPages = pokemonList.maxNumOfPages;
   res.render("index.html", {
     pokemons,
     page,
@@ -28,13 +28,17 @@ app.get("/pokemon/:id", async (req, res) => {
   const id = req.params.id;
   const pokemon = await pokeService.getPokemon(id);
   const moves = await pokeService.getPokemonMoves(id);
+  const pokemonList = await pokeService.getPokemonList();
+  const numOfPokemons = pokemonList.maxNumOfPokemons;
   const evoChain = await pokeService.getPokemonEvoChain(id);
   res.render("pokemon.html", {
     pokemon,
-    moves, evoChain
+    moves,
+    numOfPokemons,
+    evoChain
   });
 });
 
-const listener = app.listen(process.env.PORT || 3000, function () {
+const listener = app.listen(process.env.PORT || 3000, function() {
   console.log("Your app is listening on port  " + listener.address().port);
 });
