@@ -23,16 +23,17 @@ async function getPokemonEvoChain(id) {
   const evoChains = await axios.get(evoChainUrl);
   const evoData = evoChains.data.chain;
   const evoChain = [];
-  const numberOfEvolutions = evoData['evolves_to'].length;
+  const numberOfEvolutions = evoData["evolves_to"].length;
   if (numberOfEvolutions > 1) {
     for (let i = 1; i < numberOfEvolutions; i++) {
       evoChain.push({
-        "species-name": evoData['evolves_to'][i].species.name
-      })
+        "species-name": evoData["evolves_to"][i].species.name
+      });
     }
-  } evoChain.push(evoData.evolves_to[0].species.name);
+  }
+  evoChain.push(evoData.evolves_to[0].species.name);
 
-  console.log(evoChain, numberOfEvolutions)
+  console.log(evoChain, numberOfEvolutions);
 }
 
 async function getPokemonList(page) {
@@ -48,8 +49,14 @@ async function getPokemonList(page) {
   const pokemons = await Promise.all(promises);
   return {
     pokemons,
-    maxNumOfPages
+    maxNumOfPages,
+    maxNumOfPokemons
   };
 }
 
-module.exports = { getPokemon, getPokemonMoves, getPokemonList, getPokemonEvoChain };
+module.exports = {
+  getPokemon,
+  getPokemonMoves,
+  getPokemonList,
+  getPokemonEvoChain
+};

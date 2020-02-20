@@ -10,78 +10,98 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
     />
-    <script src="https://kit.fontawesome.com/225aeb8e22.js" crossorigin="anonymous">
-    </script>
-    <link rel = "shortcut icon" href = "https://raw.githubusercontent.com/lawandothman/pokedex/features/favicon.ico">
+    <script
+      src="https://kit.fontawesome.com/225aeb8e22.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/lawandothman/pokedex/features/favicon.ico"
+    />
   </head>
 
   <body>
-  <div class = "container">
-    <a href="/">
-      <h1 class="title is-1">Pokédex</h1>
-    </a>
+    <div class="container">
+      <a href="/">
+        <h1 class="title is-1">Pokédex</h1>
+      </a>
     </div>
 
     <div class="container">
-      <div class = "columns">
-          <div class= "pokemon-image column is-two-thirds">
-          <img height="300" width="300" src="{{pokemon.sprites.front_default}}" />
+      <div class="columns">
+        <div class="pokemon-image column is-two-thirds">
+          <img
+            height="300"
+            width="300"
+            src="{{pokemon.sprites.front_default}}"
+          />
         </div>
-        <div class = "info column">
+        <div class="info column">
           <h2 class="pokeman-name title is-3">{{pokemon.name}}</h2>
-          <p>Weight:  {{pokemon.weight/10}} kg</p>
-          <p>Height:  {{pokemon.height/10}} m</p>
+          <p>Weight: {{pokemon.weight/10}} kg</p>
+          <p>Height: {{pokemon.height/10}} m</p>
           <p>
-            Type(s):{%for type in pokemon.types%} 
-              <span class = "type {{type.type.name}}"> {{type.type.name}}</span> 
+            Type(s):{%for type in pokemon.types%}
+            <span class="type {{type.type.name}}"> {{type.type.name}}</span>
             {%endfor%}
           </p>
         </div>
-
-        
       </div>
 
-      <div class = "container">
-        <h3 class = "moves-title title is-4">MOVES</h3>
+      <div class="container">
+        <h3 class="moves-title title is-4">MOVES</h3>
       </div>
 
-      <div class = "moves container">
+      <div class="moves container">
         {%for move in moves%}
-          <div class = "card">
-              <p class="move-name"> {{move.data.name}}
-                {% if (move.data.damage_class.name) === "status" %}
-                <span class="fas fa-record-vinyl"></span>
-                {% elif (move.data.damage_class.name) === "special" %}
-                <span class="fas fa-bolt"></span>
-                {% else %}
-                <span class="fas fa-bahai"></span>
-                {% endif %}
-              </p>
-              <p class = " move-power"> <b>Power :</b> {{move.data.power or '100'}}</p>
-              <p class = " move-accuracy"><b>Acc:</b> {{move.data.accuracy or '100'}} % 
-              
-                <progress class="progress is-primary" value="{{move.data.accuracy or '100'}}" max="100">
-               {{move.data.accuracy or '100'}} %</progress>
-              
-                
-              </p>
-              <p class = " move-pp"> <b>PP:</b> {{move.data.pp}}</p>
-              <p class = "move-damage-class"></p>
-              <p class = " move-type">
-                  <span class = "type {{move.data.type.name}}"> {{move.data.type.name}} </span>
-              </p>
-          </div>
-        {%endfor%}
-        </div>
-      
+        <div class="card">
+          <p class="move-name">
+            {{move.data.name}} {% if (move.data.damage_class.name) === "status"
+            %}
+            <span class="fas fa-record-vinyl"></span>
+            {% elif (move.data.damage_class.name) === "special" %}
+            <span class="fas fa-bolt"></span>
+            {% else %}
+            <span class="fas fa-bahai"></span>
+            {% endif %}
+          </p>
+          <p class=" move-power"><b>Power :</b> {{move.data.power or '100'}}</p>
+          <p class=" move-accuracy">
+            <b>Acc:</b> {{move.data.accuracy or '100'}} %
 
+            <progress
+              class="progress is-primary"
+              value="{{move.data.accuracy or '100'}}"
+              max="100"
+            >
+              {{move.data.accuracy or '100'}} %</progress
+            >
+          </p>
+          <p class=" move-pp"><b>PP:</b> {{move.data.pp}}</p>
+          <p class="move-damage-class"></p>
+          <p class=" move-type">
+            <span class="type {{move.data.type.name}}">
+              {{move.data.type.name}}
+            </span>
+          </p>
+        </div>
+        {%endfor%}
+      </div>
     </div>
 
     <div class="container">
+      {% if (pokemon.id) == 1 %}
+      <button class="button is-static" disabled>Previous</button>
+
+      {% else %}
       <a class="button is-primary" href="/pokemon/{{pokemon.id - 1}}"
         >Previous</a
       >
+      {% endif %} {% if (pokemon.id) < numOfPokemons %}
       <a class="button is-primary" href="/pokemon/{{pokemon.id + 1}}">Next</a>
+      {%else%}
+      <button class="button is-static" disabled>Next</button>
+      {% endif %}
     </div>
   </body>
 </html>
