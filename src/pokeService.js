@@ -44,10 +44,10 @@ async function getPokemonEvoChain(id) {
     const pokemon = await getPokemon(id);
     pokemonImages.push({
       image: pokemon.sprites.front_default,
-      name: pokemon.name
+      name: pokemon.name,
+      id: pokemon.id
     });
   }
-  console.log(resolvedPromises);
   return {
     resolvedPromises,
     pokemonImages

@@ -167,10 +167,8 @@ li {
 }
 
 .moves-title {
-  text-align: left;
-  padding-left: 20px;
+  text-align: center;
   margin-top: 20px;
-  margin-left: 60px;
 }
 
 .move-name {
@@ -205,4 +203,14 @@ span {
 
 .evolution-card {
   height: 300px;
+  padding: 40px;
+  margin: 30px;
+  background-color: white;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.09);
+  transition: 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.evolution-card:hover {
+  box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.1);
 }

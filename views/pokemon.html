@@ -54,6 +54,7 @@
 
       <div class="evochain container">
         {% for image in evoChainImages %}
+        <a href = "/pokemon/{{image.id}}" >
         <div class="evolution-card card">
         
           <img height = "300" width = "300" src = "
@@ -63,6 +64,7 @@
         
         </div>
         {%endfor%}
+        </a>
       </div>
 
       <div class="container">
