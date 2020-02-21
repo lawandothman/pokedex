@@ -30,6 +30,7 @@ async function getPokemonEvoChain(id) {
       name: evoData.species.name,
       url: evoData.species.url
     });
+
     evoData = evoData["evolves_to"][0];
   } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
   const resolvedPromises = await Promise.all(evoChain);
@@ -39,11 +40,14 @@ async function getPokemonEvoChain(id) {
   for (url of evoChain) {
     const speciesData = await axios.get(url.url);
     const id = speciesData.data.id;
+
     const pokemon = await getPokemon(id);
     pokemonImages.push({
-      image: pokemon.sprites.front_default
+      image: pokemon.sprites.front_default,
+      name: pokemon.name
     });
   }
+  console.log(resolvedPromises);
   return {
     resolvedPromises,
     pokemonImages
