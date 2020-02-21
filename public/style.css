@@ -190,3 +190,15 @@ li {
 span {
   margin-left: 10px;
 }
+
+.evochain {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: max-content;
+  height: max-content;
+  justify-content: center;
+}

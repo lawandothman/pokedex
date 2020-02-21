@@ -31,7 +31,8 @@ async function getPokemonEvoChain(id) {
 
     evoData = evoData["evolves_to"][0];
   } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
-  console.log(evoChain, numOfEvolutions);
+  const resolvedPromises = await Promise.all(evoChain);
+  return resolvedPromises;
 }
 
 async function getPokemonList(page) {
