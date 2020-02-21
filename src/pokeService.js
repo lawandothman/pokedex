@@ -16,23 +16,44 @@ async function getPokemonMoves(id) {
   const resolvePromises = await Promise.all(moves);
   return resolvePromises;
 }
+
 async function getPokemonEvoChain(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
-  const species = await axios.get(url);
+  const species = await getPokemonSpecies(id);
   const evoChainUrl = species.data.evolution_chain.url;
   const evoChains = await axios.get(evoChainUrl);
   let evoData = evoChains.data.chain;
-  const numOfEvolutions = evoData.evolves_to.length;
+  const numOfEvolutions = evoData.evolves_to.length; // what if a pokemon has more than 1 evoChain
+
   const evoChain = [];
   do {
     evoChain.push({
-      name: evoData.species.name
+      name: evoData.species.name,
+      url: evoData.species.url
     });
-
     evoData = evoData["evolves_to"][0];
   } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
   const resolvedPromises = await Promise.all(evoChain);
-  return resolvedPromises;
+
+  // get pokemon images
+  const pokemonImages = [];
+  for (url of evoChain) {
+    const speciesData = await axios.get(url.url);
+    const id = speciesData.data.id;
+    const pokemon = await getPokemon(id);
+    pokemonImages.push({
+      image: pokemon.sprites.front_default
+    });
+  }
+  return {
+    resolvedPromises,
+    pokemonImages
+  };
+}
+
+async function getPokemonSpecies(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+  const species = await axios.get(url);
+  return species;
 }
 
 async function getPokemonList(page) {

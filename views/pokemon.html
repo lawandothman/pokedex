@@ -53,11 +53,13 @@
       </div>
 
       <div class="evochain container">
-        {% for name in evoChain %}
+        {% for image in evoChainImages %}
         <div class="evolution-card card">
-          <p class="evolves-to">
-          Name: {{name.name}} 
-          </p>
+        
+          <img height = "300" width = "300" src = "
+          {{image.image}}
+          ">
+        
         </div>
         {%endfor%}
       </div>
