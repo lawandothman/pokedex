@@ -30,12 +30,15 @@ app.get("/pokemon/:id", async (req, res) => {
   const moves = await pokeService.getPokemonMoves(id);
   const pokemonList = await pokeService.getPokemonList();
   const numOfPokemons = pokemonList.maxNumOfPokemons;
-  const evoChain = await pokeService.getPokemonEvoChain(id);
+  const evoChainData = await pokeService.getPokemonEvoChain(id);
+  const evoChain = evoChainData.resolvedPromises;
+  const evoChainImages = evoChainData.pokemonImages;
   res.render("pokemon.html", {
     pokemon,
     moves,
     numOfPokemons,
-    evoChain
+    evoChain,
+    evoChainImages
   });
 });
 
