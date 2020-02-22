@@ -22,36 +22,40 @@ async function getPokemonEvoChain(id) {
   const evoChainUrl = species.data.evolution_chain.url;
   const evoChains = await axios.get(evoChainUrl);
   let evoData = evoChains.data.chain;
-  const numOfEvolutions = evoData.evolves_to.length; // what if a pokemon has more than 1 evoChain
 
-  const evoChain = [];
+  const speciesUrl = [];
   do {
-    evoChain.push({
-      name: evoData.species.name,
+    const numOfEvolutions = evoData.evolves_to.length;
+    speciesUrl.push({
       url: evoData.species.url
     });
 
+    if (numOfEvolutions > 1) {
+      for (let i = 1; i < numOfEvolutions; i++) {
+        speciesUrl.push({
+          url: evoData.evolves_to[i].species.url
+        });
+      }
+    }
     evoData = evoData["evolves_to"][0];
   } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
-  const resolvedPromises = await Promise.all(evoChain);
 
   // get pokemon images
-  const pokemonImages = [];
-  for (url of evoChain) {
+  const evoChainData = [];
+  for (url of speciesUrl) {
     const speciesData = await axios.get(url.url);
     const id = speciesData.data.id;
 
     const pokemon = await getPokemon(id);
-    pokemonImages.push({
+    evoChainData.push({
       image: pokemon.sprites.front_default,
       name: pokemon.name,
       id: pokemon.id
     });
   }
-  return {
-    resolvedPromises,
-    pokemonImages
-  };
+
+  const resolvedPromises = await Promise.all(evoChainData);
+  return resolvedPromises;
 }
 
 async function getPokemonSpecies(id) {
