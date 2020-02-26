@@ -37,7 +37,10 @@ async function getPokemonEvoChain(id) {
     evoChain.push({
       url: evoData.species.url,
       name: evoData.species.name,
-      image: pokemon.sprites.front_default
+      id: pokemon.id,
+      image: pokemon.sprites.front_default,
+      min_level: !evoData.evolves_to[0] ? 1 : evoData.evolves_to[0].evolution_details[0].min_level,
+
     });
 
     if (numOfEvolutions > 1) {
@@ -46,8 +49,11 @@ async function getPokemonEvoChain(id) {
         evoChain.push({
           url: evoData.evolves_to[i].species.url,
           name: evoData.evolves_to[i].species.name,
-          image: pokemon.sprites.front_default
-        });
+          id: pokemon.id,
+          image: pokemon.sprites.front_default,
+          min_level: !evoData.evolves_to[i].evolution_details[0].min_level ? 1 : evoData.evolves_to[i].evolution_details[0].min_level
+        })
+        console.log(evoChain);
       }
     }
     evoData = evoData["evolves_to"][0];
