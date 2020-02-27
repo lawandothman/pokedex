@@ -21,7 +21,7 @@
 
   <div class="container">
     <div class="columns">
-      <div class="pokemon-image column is-two-thirds">
+      <div class="pokemon-image column is-half">
         <img height="300" width="300" src="{{pokemon.sprites.front_default}}" />
       </div>
       <div class="info column">
@@ -29,7 +29,7 @@
         <p>Weight: {{pokemon.weight/10}} kg</p>
         <p>Height: {{pokemon.height/10}} m</p>
         <p>
-          Type(s):{%for type in pokemon.types%}
+          {%for type in pokemon.types%}
           <span class="type {{type.type.name}}"> {{type.type.name}}</span>
           {%endfor%}
         </p>
