@@ -5,11 +5,13 @@
 body {
   margin: 0;
 }
+li {
+  list-style-type: none;
+}
 .container {
   margin: auto;
   text-align: center;
 }
-
 .type {
   text-transform: capitalize;
   text-align: center;
@@ -125,11 +127,8 @@ body {
 }
 
 /* Pokemon Page*/
-li {
-  list-style-type: none;
-}
 .title {
-  text-align: center;
+  display: inline;
 }
 .pokeman-name {
   text-transform: uppercase;
