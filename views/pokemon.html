@@ -50,7 +50,13 @@
           <div class="evolution-card card">
             <img height="300" width="300" src="{{image.image}}">
             <p class="name">{{image.name}}</p>
-            <p class="min-level"><b>Min-Level:</b> {{image.min_level}}</p>
+            {% if (image.min_level) == null %}
+              <p></p>
+              {% elif (image.min_level) == 1 %}
+              <p></p>
+            {% else %}
+            <p class="min-level"><b>Min-Level: </b>{{image.min_level}}</p>
+            {% endif %}
           </div>
         </a>
       {%endfor%}
