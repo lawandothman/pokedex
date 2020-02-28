@@ -14,6 +14,13 @@ async function getPokemonByName(name) {
   return pokemon;
 }
 
+async function getPokemonSpecies(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+  const res = await axios.get(url);
+  const species = res.data;
+  return species;
+}
+
 async function getPokemonMoves(id) {
   const pokemon = await getPokemon(id);
   const moves = [];
@@ -26,7 +33,7 @@ async function getPokemonMoves(id) {
 
 async function getPokemonEvoChain(id) {
   const species = await getPokemonSpecies(id);
-  const evoChainUrl = species.data.evolution_chain.url;
+  const evoChainUrl = species.evolution_chain.url;
   const evoChains = await axios.get(evoChainUrl);
   let evoData = evoChains.data.chain;
 
@@ -39,8 +46,9 @@ async function getPokemonEvoChain(id) {
       name: evoData.species.name,
       id: pokemon.id,
       image: pokemon.sprites.front_default,
-      min_level: !evoData.evolves_to[0] ? 1 : evoData.evolves_to[0].evolution_details[0].min_level,
-
+      min_level: !evoData.evolves_to[0]
+        ? 1
+        : evoData.evolves_to[0].evolution_details[0].min_level
     });
 
     if (numOfEvolutions > 1) {
@@ -51,9 +59,10 @@ async function getPokemonEvoChain(id) {
           name: evoData.evolves_to[i].species.name,
           id: pokemon.id,
           image: pokemon.sprites.front_default,
-          min_level: !evoData.evolves_to[i].evolution_details[0].min_level ? 1 : evoData.evolves_to[i].evolution_details[0].min_level
-        })
-        console.log(evoChain);
+          min_level: !evoData.evolves_to[i].evolution_details[0].min_level
+            ? 1
+            : evoData.evolves_to[i].evolution_details[0].min_level
+        });
       }
     }
     evoData = evoData["evolves_to"][0];
@@ -61,12 +70,6 @@ async function getPokemonEvoChain(id) {
 
   const resolvedPromises = await Promise.all(evoChain);
   return resolvedPromises;
-}
-
-async function getPokemonSpecies(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
-  const species = await axios.get(url);
-  return species;
 }
 
 async function getPokemonList(page) {
