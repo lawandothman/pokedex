@@ -36,16 +36,16 @@ async function getPokemonEvoChain(id) {
   const evoChainUrl = species.evolution_chain.url;
   const evoChains = await axios.get(evoChainUrl);
   let evoData = evoChains.data.chain;
-
   const evoChain = [];
   do {
     const numOfEvolutions = evoData.evolves_to.length;
-    let pokemon = await getPokemonByName(evoData.species.name);
+    let pokemon = getPokemonByName(evoData.species.name);
+    const promises = await Promise.all([pokemon, evoChain]);
     evoChain.push({
       url: evoData.species.url,
       name: evoData.species.name,
-      id: pokemon.id,
-      image: pokemon.sprites.front_default,
+      id: promises[0].id,
+      image: promises[0].sprites.front_default,
       min_level: !evoData.evolves_to[0]
         ? 1
         : evoData.evolves_to[0].evolution_details[0].min_level
@@ -65,6 +65,7 @@ async function getPokemonEvoChain(id) {
         });
       }
     }
+
     evoData = evoData["evolves_to"][0];
   } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
 
