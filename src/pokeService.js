@@ -33,42 +33,37 @@ async function getPokemonMoves(id) {
 
 async function getPokemonEvoChain(id) {
   const species = await getPokemonSpecies(id);
-  const evoChainUrl = species.evolution_chain.url;
-  const evoChains = await axios.get(evoChainUrl);
-  let evoData = evoChains.data.chain;
+  const res = await axios.get(species.evolution_chain.url);
+  let evoData = res.data.chain;
   const evoChain = [];
   do {
-    const numOfEvolutions = evoData.evolves_to.length;
-    let pokemon = getPokemonByName(evoData.species.name);
-    const promises = await Promise.all([pokemon, evoChain]);
+    const promises = getPokemonByName(evoData.species.name);
+    const pokemon = await Promise.all([promises]);
     evoChain.push({
-      url: evoData.species.url,
       name: evoData.species.name,
-      id: promises[0].id,
-      image: promises[0].sprites.front_default,
+      id: pokemon[0].id,
+      image: pokemon[0].sprites.front_default,
       min_level: !evoData.evolves_to[0]
         ? 1
         : evoData.evolves_to[0].evolution_details[0].min_level
     });
-
+    const numOfEvolutions = evoData.evolves_to.length;
     if (numOfEvolutions > 1) {
       for (let i = 1; i < numOfEvolutions; i++) {
-        pokemon = await getPokemonByName(evoData.evolves_to[i].species.name);
+        const promises = getPokemonByName(evoData.evolves_to[i].species.name);
+        const pokemon = await Promise.all([promises]);
         evoChain.push({
-          url: evoData.evolves_to[i].species.url,
           name: evoData.evolves_to[i].species.name,
-          id: pokemon.id,
-          image: pokemon.sprites.front_default,
+          id: pokemon[0].id,
+          image: pokemon[0].sprites.front_default,
           min_level: !evoData.evolves_to[i].evolution_details[0].min_level
             ? 1
             : evoData.evolves_to[i].evolution_details[0].min_level
         });
       }
     }
-
     evoData = evoData["evolves_to"][0];
   } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
-
   const resolvedPromises = await Promise.all(evoChain);
   return resolvedPromises;
 }
