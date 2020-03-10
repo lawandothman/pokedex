@@ -27,10 +27,12 @@ app.get("/pokemon/:id", async (req, res) => {
   console.log("Someone is requesting a pokemon");
   const id = req.params.id;
   const pokemon = await pokeService.getPokemon(id);
-  const moves = await pokeService.getPokemonMoves(id);
-  const pokemonList = await pokeService.getPokemonList();
+  const [moves, evoChain, pokemonList] = await Promise.all([
+    pokeService.getPokemonMoves(id),
+    pokeService.getPokemonEvoChain(id),
+    pokeService.getPokemonList()
+  ])
   const numOfPokemons = pokemonList.maxNumOfPokemons;
-  const evoChain = await pokeService.getPokemonEvoChain(id);
   res.render("pokemon.html", {
     pokemon,
     moves,

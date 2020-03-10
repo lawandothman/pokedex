@@ -1,71 +1,56 @@
 const axios = require("axios");
+const BASE_URL = `https://pokeapi.co/api/v2`
 
-async function getPokemon(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const res = await axios.get(url);
-  const pokemon = res.data;
-  return pokemon;
+const getFromUrl = async (url) => {
+  try {
+    console.log(`Getting ${url}`)
+    const { data } = await axios.get(url)
+    console.log(`Got ${url}`)
+    return data
+  } catch (e) {
+    console.error(e)
+  }
 }
+const get = (path) => (id) => getFromUrl(`${BASE_URL}${path}/${id}`)
 
-async function getPokemonByName(name) {
-  const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-  const res = await axios.get(url);
-  const pokemon = res.data;
-  return pokemon;
-}
-
-async function getPokemonSpecies(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
-  const res = await axios.get(url);
-  const species = res.data;
-  return species;
-}
+const getPokemon = get('/pokemon')
+const getPokemonSpecies = get('/pokemon-species')
 
 async function getPokemonMoves(id) {
   const pokemon = await getPokemon(id);
-  const moves = [];
-  for (move of pokemon.moves) {
-    moves.push(axios.get(move.move.url));
+  return Promise.all(pokemon.moves.map(move => getFromUrl(move.move.url)));
+}
+
+function flattenArray(arr) {
+  return [].concat.apply([], arr)
+}
+
+function flatGraph(root) {
+  if (root.evolves_to) {
+    const { evolves_to } = root
+    return [root].concat(flattenArray(evolves_to.map(flatGraph)))
   }
-  const resolvePromises = await Promise.all(moves);
-  return resolvePromises;
+  return [root]
+}
+
+function getMinLevel(evo) {
+  if (evo.evolution_details[0]) {
+    return evo.evolution_details[0].min_level
+  }
+  return null
 }
 
 async function getPokemonEvoChain(id) {
   const species = await getPokemonSpecies(id);
-  const res = await axios.get(species.evolution_chain.url);
-  let evoData = res.data.chain;
-  const evoChain = [];
-  do {
-    const promises = getPokemonByName(evoData.species.name);
-    const pokemon = await Promise.all([promises]);
-    evoChain.push({
-      name: evoData.species.name,
-      id: pokemon[0].id,
-      image: pokemon[0].sprites.front_default,
-      min_level: !evoData.evolves_to[0]
-        ? 1
-        : evoData.evolves_to[0].evolution_details[0].min_level
-    });
-    const numOfEvolutions = evoData.evolves_to.length;
-    if (numOfEvolutions > 1) {
-      for (let i = 1; i < numOfEvolutions; i++) {
-        const promises = getPokemonByName(evoData.evolves_to[i].species.name);
-        const pokemon = await Promise.all([promises]);
-        evoChain.push({
-          name: evoData.evolves_to[i].species.name,
-          id: pokemon[0].id,
-          image: pokemon[0].sprites.front_default,
-          min_level: !evoData.evolves_to[i].evolution_details[0].min_level
-            ? 1
-            : evoData.evolves_to[i].evolution_details[0].min_level
-        });
-      }
+  const evoData = (await axios.get(species.evolution_chain.url)).data.chain;
+  const evoList = flatGraph(evoData)
+  return Promise.all(evoList.map(async (evo, i) => {
+    return {
+      min_level: getMinLevel(evo),
+      ...evo,
+      ...(await getPokemon(evo.species.name))
     }
-    evoData = evoData["evolves_to"][0];
-  } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
-  const resolvedPromises = await Promise.all(evoChain);
-  return resolvedPromises;
+  }))
 }
 
 async function getPokemonList(page) {
