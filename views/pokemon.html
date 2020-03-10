@@ -77,13 +77,13 @@
           <p class=" move-power"><b>Power:</b> {{move.power or '100'}}</p>
           <p class=" move-accuracy">
             <b>Acc:</b> {{move.accuracy or '100'}} %
-            <progress class="progress is-primary" value="{{move.data.accuracy or '100'}}" max="100">
+            <progress class="progress is-primary" value="{{move.accuracy or '100'}}" max="100">
               {{move.accuracy or '100'}} %
             </progress>
           </p>
           <p class=" move-pp"><b>PP:</b> {{move.pp}}</p>
           <p class=" move-type">
-            <span class="type {{move.data.type.name}}">
+            <span class="type {{move.type.name}}">
               {{move.type.name}}
             </span>
           </p>
