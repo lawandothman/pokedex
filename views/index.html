@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pokédex</title>
-    <link rel = "stylesheet" type = "text/css" href = "/style.css">
-    <link
-      rel="stylesheet"
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link 
+      rel="stylesheet" 
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
     />
-    <link
-      rel="stylesheet"
+    <link 
+      rel="stylesheet" 
       src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
     />
   </head>
 
-
-  <body class = "has-background-white">
+  <body class="has-background-white">
     <div class="container">
-      <div class="block">
-        <h1 class="title is-1">Pokédex</h1>
-      </div>
+      <h1 class="title is-1">Pokédex</h1>
     </div>
 
-      <div class="container">
-        <ol class = "pokedex" >
-        
-          {%for pokemon in pokemons%}
-          <li class = "pokemon-card">
-          <a href="/pokemon/{{pokemon.data.id}}">
-            <p class="name">{{pokemon.data.name}}</p>
-            <img class = "image" src =
-            "{{pokemon.data.sprites["front_default"]}}" onerror = "this.src='https://www.brooklinelibrary.org/wp-content/uploads/2016/07/2000px-Poké_Ball.svg_-1.png'">
-          </a>
+    <div class="container">
+      <ol class="pokedex" >
+        {%for pokemon in pokemons%}
+          <li class="pokemon-card">
+            <a href="/pokemon/{{pokemon.data.id}}">
+              <p class="name">{{pokemon.data.name}}</p>
+              <img class="image"
+              src="{{pokemon.data.sprites["front_default"]}}" 
+              onerror="this.src='pokeball.jpg'">
+            </a>
             {%for type in pokemon.data.types%}
-             <span class = "type {{type.type.name}}"> {{type.type.name}} </span>
-             {%endfor%}
+              <span class="type {{type.type.name}}">{{type.type.name}}</span>
             {%endfor%}
           </li>
-        </ol>
-      </div>
+        {%endfor%}
+      </ol>
+    </div>
 
-      <div class="container">
-          {% if (page-1) >= 0%}
-          <a class = "button is-primary" href="/?page={{page-1}}"> Previous </a>
-          {% else %}
-          <button class = "button is-static" diasbled> Previous </button>
-          {%endif%}
-          {%if (page+1) < maxNumOfPages%}
-          <a class = "button is-primary" href="/?page={{page+1}}"> Next </a>
-          {% else %}
-          <button class = "button is-static" disabled> Next </button>
-          {%endif%}
-      </div>
-      <script src="../client.js"></script>
+    <div class="container">
+      {% if (page-1) >= 0%}
+        <a class="button is-primary" href="/?page={{page-1}}"> Previous </a>
+      {% else %}
+        <button class="button is-static" diasbled> Previous </button>
+      {%endif%}
+
+      {%if (page+1) < maxNumOfPages%}
+        <a class="button is-primary" href="/?page={{page+1}}"> Next </a>
+      {% else %}
+        <button class="button is-static" disabled> Next </button>
+      {%endif%}
+    </div>
+
+    <script src="../client.js"></script>
   </body>
 </html>
