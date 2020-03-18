@@ -12,6 +12,10 @@ li {
   margin: auto;
   text-align: center;
 }
+.credit {
+  padding-top: 20px;
+  font-size: small;
+}
 .type {
   text-transform: capitalize;
   text-align: center;
